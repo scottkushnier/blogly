@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        a:link { 
+            text-decoration: none; 
+        } 
+        a:visited { 
+            text-decoration: none; 
+        } 
+        a:hover {
+            text-decoration: underline;
+        }
+        a {
+            color: rgb(7, 47, 179);
+        }
+        tr.buttons {
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+
+    {% if users == 'None' %}
+
+    {% endif %}
+
+    {% if is_userlist %}
+    <h1>Users</h1>
+        {% if users %}
+            <ul>
+                {% for user in users %}
+                <li> 
+                <a href="{{user.id}}">{{user.first_name}} {{user.last_name}} </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    <br>
+    <a href="new"><button submit="">Add User</button></a>
+    {% endif %}
+
+    {% if user %}
+    <table>
+        <tr>
+            <td>
+                <img src="http://localhost:5000/static/{{user.image_url}}" height="100px"></img>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <b>{{user.first_name}} {{user.last_name}}</b>
+                        </td>
+                    </tr>
+                    <tr><td><span height="75px">&nbsp;</span></td></tr>
+                    <tr class="buttons">
+                        <td class="buttons">
+                            <a href="edit"><button>Edit</button></a>
+                            &nbsp;
+                            <a href="delete"><button>Delete</button></a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <a href="../../users"><button>Back to all Users</button></a>
+    {% endif %}
+
+    {% if newuser %}
+    <h1>Create a User</h1>
+    <form method="post">
+        <label name="first">First Name</label>
+        <input type="text" name="first" label="first"></input>
+        <br><br>
+        <label name="last">Last Name</label>
+        <input type="text" name="last" label="last"></input>
+        <br><br>
+        <label name="image">Image</label>
+        <input type="text" name="image" label="image"></input>
+        <br><br><br>
+        <a href="add"><button submit="">Add</button></a>
+    </form>
+    {% endif %}
+
+    {% if edit_user %}
+    <h1>Edit a User</h1>
+    <form method="post">
+        <label name="first">First Name</label>
+        <input type="text" name="first" label="first" value="{{edit_user.first_name}}"></input>
+        <br><br>
+        <label name="last">Last Name</label>
+        <input type="text" name="last" label="last" value="{{edit_user.last_name}}"></input>
+        <br><br>
+        <label name="image">Image</label>
+        <input type="text" name="image" label="image" value="{{edit_user.image_url}}"></input>
+        <br><br><br>
+        <a href="edit"><button submit="">Save</button></a>
+    </form>
+    {% endif %}
+
+
+</body>
+</html>
