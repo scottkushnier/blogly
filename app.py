@@ -1,19 +1,24 @@
 """Blogly application."""
 
-from flask import Flask, render_template, request, redirect
+
+import sys
 from models import db, connect_db, User
-
-
-def show_where():
-    print("here I am in app")
+from flask import Flask, render_template, request, redirect
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = False
 
+testing = 'unittest' in sys.modules
+if not testing:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
+    app.config['SQLALCHEMY_ECHO'] = False
+    app.config['TESTING'] = True
 
-show_where()
+connect_db(app)
 
 
 @app.route('/')
