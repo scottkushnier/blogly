@@ -4,12 +4,16 @@ from flask import Flask, render_template, request, redirect
 from models import db, connect_db, User
 
 
+def show_where():
+    print("here I am in app")
+
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 
-connect_db(app)
+
+show_where()
 
 
 @app.route('/')

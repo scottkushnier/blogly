@@ -2,15 +2,22 @@
 
 from app import app
 from unittest import TestCase
-from models import db, User
+from models import db, User, connect_db
+
+
+def show_where():
+    print("here I am in test")
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['TESTING'] = True
 
+connect_db(app)
 
 print('SQL DATABASE: ', app.config['SQLALCHEMY_DATABASE_URI'])
 
+show_where()
 
 db.drop_all()
 db.create_all()
