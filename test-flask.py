@@ -1,14 +1,16 @@
 
 
-from app import app
+from models import db, User
+from create_app import create_app
 from unittest import TestCase
-from models import db, User, connect_db
+from dotenv import load_dotenv
+from os import getenv
 
-print('SQL DATABASE: ', app.config['SQLALCHEMY_DATABASE_URI'])
+load_dotenv('.env.test')
+app = create_app()
 
 db.drop_all()
 db.create_all()
-
 
 class UsersTest(TestCase):
     def setUp(self):
